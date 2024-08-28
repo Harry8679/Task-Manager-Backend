@@ -2,7 +2,8 @@ const asyncHandler = require('express-async-handler');
 const Task = require('../models/task.model');
 
 const getAllTasks = asyncHandler(async (req, res) => {
-    res.send('Get All Tasks updated 2');
+    const tasks = await Task.find();
+    res.status(200).json(tasks);
 });
 
 const createTask = asyncHandler(async (req, res) => {
