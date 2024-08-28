@@ -46,7 +46,6 @@ const DeleteTask = asyncHandler(async (req, res) => {
         if (!task) {
             return res.status(404).json({ message: `No task with this id ${id} does not exist` });
         }
-        // await Task.findByIdAndDelete(id);
         
         res.send('Task deleted successfully');
     } catch (err) {
@@ -54,4 +53,25 @@ const DeleteTask = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { getAllTasks, createTask, SingleTask, DeleteTask };
+const updateTask = asyncHandler(async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Vérifier si l'ID est un ObjectId valide
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: "The ID entered is not of the right type" });
+        }
+
+        const task = await Task.findByIdAndUpdate({ _id: id }, req.body, { new: true, runValidators: true });
+
+        if (!task) {
+            return res.status(404).json({ message: `No task with this id ${id} does not exist` });
+        }
+        
+        res.send(task);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+module.exports = { getAllTasks, createTask, SingleTask, DeleteTask, updateTask };
