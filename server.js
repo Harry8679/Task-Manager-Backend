@@ -9,6 +9,7 @@ dotenv.config();
 
 const app = express();
 
+app.use(express.json());
 app.use('/api/v1/tasks', taskRoutes);
 
 const PORT = process.env.PORT || 4500;
