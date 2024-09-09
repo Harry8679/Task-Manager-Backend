@@ -11,7 +11,8 @@ const app = express();
 
 // Utiliser le middleware CORS pour autoriser les requêtes cross-origin
 app.use(cors({
-    origin: 'http://localhost:3003', // Remplace par l'URL de ton frontend
+    // origin: 'http://localhost:3003', // Remplace par l'URL de ton frontend
+    origin: 'https://emarh-task-manager.netlify.app', // Remplace par l'URL de ton frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Spécifie les méthodes autorisées
     credentials: true, // Si tu utilises des cookies ou des informations d'authentification
 }));
